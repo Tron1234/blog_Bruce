@@ -2,7 +2,7 @@
   <div>
     <!-- sideBar -->
     <div class="h-screen flex flex-row bg-gray-100 box-border">
-      <div class="z-10 absolute inset-0 flex flex-col justify-between transition-all pt-4 pb-8 border-r-2 border-gray-100 overflow-hidden w-48 -translate-x-48" :class="[{'transform':hideMenu},bg200]">
+      <div class="z-10 fixed inset-0 flex flex-col justify-between transition-all pt-4 pb-8 border-r-2 border-gray-100 overflow-hidden w-48 -translate-x-48" :class="[{'transform':hideMenu},bg200]">
         <div class="absolute top-3 right-3 text-2xl" @click="hideMenu = true">
           <icon class="cursor-pointer text-2xl" type="menu_hide" />
         </div>
@@ -17,16 +17,19 @@
           </ul>
         </div>
         <div class="flex pl-9">
-          <img class="rounded-full w-8 mr-4" :src="getUserInfo.avatar" />
+          <img class="rounded-full w-8 h-8 object-contain mr-4" :src="getUserInfo.avatar" />
           <div class="text-xl font-bold text-gray-800">
             {{getUserInfo.nickname}}
           </div>
         </div>
       </div>
-      <div class="absolute inset-0 transition-all bg-white" :class="[{'md:left-48':!hideMenu},bg200]">
-        <div class="hidden md:flex items-center px-8 py-3" :class="hideMenu?'justify-between':'justify-end'">
-          <div @click="hideMenu = false">
-            <icon class="cursor-pointer text-2xl" v-show="hideMenu" type="menu_show" />
+      <div class="absolute left-0 top-0 right-0 h-screen transition-all bg-white" :class="[{'md:left-48':!hideMenu},bg200]">
+        <div class="hidden md:flex items-center justify-between px-8 py-3">
+          <div class="flex items-center">
+            <div class="mr-4" v-show="hideMenu" @click="hideMenu = false">
+              <icon class="cursor-pointer text-2xl" type="menu_show" />
+            </div>
+            <div class="font-bold text-3xl">{{articleInfo.title}}</div>
           </div>
           <!-- 主题 -->
           <div class="flex items-center">
@@ -53,17 +56,16 @@
             </div>
           </div>
         </div>
-        <div class="md:hidden flex justify-between">
+        <div class="md:hidden fixed top-0 left-0 w-screen h-14 box-border flex justify-between px-4 pt-3" :class="bg200">
           <nuxt-link to="/">
-            <div class="px-8 pt-3 pb-1">
-              <icon class="cursor-pointer text-2xl" type="back" />
-            </div>
+            <icon class="cursor-pointer text-2xl" type="back" />
           </nuxt-link>
-          <div class="px-8 pt-3 pb-1" @click="hideMenu = !hideMenu">
+          <div class="font-bold text-xl">{{articleInfo.title}}</div>
+          <div @click="hideMenu = !hideMenu">
             <icon class="cursor-pointer text-2xl" type="menu_show" />
           </div>
         </div>
-        <v-md-preview :style="{'--previewbg':bg200}" ref="preview" :text="articleInfo.content" />
+        <v-md-preview class="md:relative pt-14 md:pt-0" :style="{'--previewbg':bg200}" ref="preview" :text="articleInfo.content" />
       </div>
     </div>
     <!-- 移动端切换主题 -->
@@ -105,11 +107,6 @@
 </template>
 <script>
 import { mapMutations, mapGetters } from "vuex";
-import VMdPreview from '@kangc/v-md-editor/lib/preview';
-import '@kangc/v-md-editor/lib/style/preview.css';
-import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
-import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
-import Prism from 'prismjs';
 export default {
   layout: 'article',
   data() {
@@ -225,7 +222,7 @@ export default {
         return { color: item, bg200, text200 }
       })
     },
-    theme(){
+    theme() {
       return this.$store.state.themes.theme;
     },
     themeListExtra() {
@@ -268,12 +265,8 @@ export default {
       articleInfo
     }
   },
-  created() {
-    VMdPreview.use(vuepressTheme, {
-      Prism
-    });
-  },
   mounted() {
+    document.getElementsByClassName('vuepress-markdown-body')[0].classList.add('custom');
     this.hideMenu = document.body.clientWidth <= 768;
     const anchors = this.$refs.preview.$el.querySelectorAll('h1,h2,h3,h4,h5,h6');
     const titles = Array.from(anchors).filter(title => !!title.innerText.trim());
@@ -288,9 +281,6 @@ export default {
       indent: hTags.indexOf(el.tagName)
     }));
   },
-  components: {
-    VMdPreview
-  },
   methods: {
     ...mapMutations('themes', ['setTheme']),
     handleAnchorClick(anchor) {
@@ -304,6 +294,7 @@ export default {
           top: 60
         })
       }
+      this.hideMenu = true;
     },
     setThemes(params) {
       this.isShowThemes = false;
@@ -325,6 +316,6 @@ li > a {
 }
 ::v-deep .vuepress-markdown-body {
   background: var(--previewbg);
-  @apply px-8 pt-1 pb-6;
+  @apply px-5 md:px-8 pt-2 pb-6;
 }
 </style>

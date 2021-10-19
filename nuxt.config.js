@@ -32,6 +32,7 @@ export default {
     '~/plugins/api-plugins',
     '~/plugins/toast',
     '~/plugins/filter',
+    '~/plugins/v-md-preview',
     { src: "~plugins/persistedstate.js", ssr: true }
   ],
 

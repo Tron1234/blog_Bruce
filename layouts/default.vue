@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center default-box min-h-screen" :style="{ '--seasonbg': season }">
+  <div class="flex justify-center default-box min-h-screen" :style="[{ '--seasonbg': season }]">
     <div class="flex flex-col container" :class="bg200">
       <div class="flex justify-between sm:p-4 sm:pb-3 sm:pt-3">
         <div class="flex flex-col justify-between flex-grow">
@@ -292,6 +292,9 @@ export default {
       })
     }
   },
+  mounted(){
+    document.body.classList.add(`bg-${this.theme}-200`);
+  },
   methods: {
     ...mapMutations('themes', ['setTheme']),
     setThemes(params) {
@@ -309,7 +312,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .default-box {
   position: relative;
 }
