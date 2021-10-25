@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
-    <div class="w-0 flex-grow sm:pl-5 sm:pr-5 md:pr-1 sm:pb-4">
-      <div class="fixed left-0 top-0 w-full h-26 md:h-auto md:relative z-50 md:z-0">
+    <div class="w-0 flex-grow md:px-5 lg:pr-1 md:pb-4">
+      <div class="fixed left-0 top-0 w-full h-26 sm:h-auto sm:static z-50 md:z-0">
         <!-- 搜索框 -->
         <div class="
               flex
@@ -54,7 +54,7 @@
           </div>
         </div>
         <!-- 移动端分类 -->
-        <div class="sm:hidden flex w-full flex-col sm:flex-row sm:flex-grow">
+        <div class="md:hidden flex w-full flex-col sm:flex-row sm:flex-grow">
           <div class="
             flex
             pt-1
@@ -95,8 +95,8 @@
       </div>
 
       <!-- 文章 -->
-      <div class="sm:w-full mx-3 sm:m-0 pt-24 md:pt-0">
-        <div class="w-full cursor-pointer px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-3 sm:mt-4" v-for="(item,index) of articleList" :key="index" @click="articleDetail(item.id)">
+      <div class="sm:w-full mx-3 pt-25 sm:m-0 sm:pt-0 sm:px-4 md:px-0">
+        <div class="w-full cursor-pointer p-4 sm:px-8 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-4" v-for="(item,index) of articleList" :key="index" @click="articleDetail(item.id)">
           <div class="flex items-center justify-between">
             <span class="text-sm font-light text-gray-600 dark:text-gray-400">{{item.time | timeFilter}}</span>
             <a class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform rounded-lg tworow-ellipsis" :class="[bg500,hoverbg400]" @click.stop="getArticleBySecondaryCategory(item.secondaryCategoryId)">{{item.secondaryName}}</a>
@@ -113,7 +113,7 @@
         </div>
       </div>
     </div>
-    <div class="hidden md:block sm:w-1/4 2xl:w-3/15">
+    <div class="hidden md:block md:w-1/4 2xl:w-3/15">
       <!-- 分类和推荐文章 -->
       <div class="sm:block p-4">
         <!-- 分类 -->

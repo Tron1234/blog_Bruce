@@ -8,9 +8,9 @@
         </div>
         <div class="flex flex-col">
           <p class="px-8 text-3xl font-bold mb-6">目录</p>
-          <ul class="flex flex-col px-8">
+          <ul class="flex flex-col pl-6 pr-4">
             <li v-for="(anchor,index) in titles" :key="index" :style="{paddingLeft:`${anchor.indent*6}px`}" @click="handleAnchorClick(anchor)">
-              <a class="whitespace-nowrap flex flex-row items-center h-8 transform hover:translate-x-1 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+              <a class="flex flex-row flex-wrap items-center py-1 transform hover:translate-x-1 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                 {{anchor.title}}
               </a>
             </li>
@@ -23,8 +23,8 @@
           </div>
         </div>
       </div>
-      <div class="absolute left-0 top-0 right-0 h-screen transition-all bg-white" :class="[{'md:left-48':!hideMenu},bg200]">
-        <div class="hidden md:flex items-center justify-between px-8 py-3">
+      <div class="absolute left-0 top-0 right-0 transition-all bg-white" :class="[{'md:left-48':!hideMenu},bg200]">
+        <div class="hidden sticky top-0 z-10 md:flex items-center justify-between px-8 py-3" :class="bg200">
           <div class="flex items-center">
             <div class="mr-4" v-show="hideMenu" @click="hideMenu = false">
               <icon class="cursor-pointer text-2xl" type="menu_show" />
@@ -56,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="md:hidden fixed top-0 left-0 w-screen h-14 box-border flex justify-between px-4 pt-3" :class="bg200">
+        <div class="md:hidden z-10 fixed top-0 left-0 w-screen h-14 box-border flex justify-between px-4 pt-3" :class="bg200">
           <nuxt-link to="/">
             <icon class="cursor-pointer text-2xl" type="back" />
           </nuxt-link>

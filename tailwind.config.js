@@ -39,7 +39,8 @@ module.exports = {
         '12/15': '78%',
         '3/15': '22%'
       },
-      height: {
+      spacing: {
+        '25': '6.2rem',
         '26': '6.5rem'
       },
       fontFamily: ['hover', 'focus']
