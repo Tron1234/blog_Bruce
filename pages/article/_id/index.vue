@@ -69,7 +69,7 @@
       </div>
     </div>
     <!-- 移动端切换主题 -->
-    <div id="otherThemes" class="md:hidden fixed right-8 bottom-8 flex items-center">
+    <div id="otherThemes" class="md:hidden z-10 fixed right-8 bottom-8 flex items-center">
       <div class="
           w-11
           h-11
