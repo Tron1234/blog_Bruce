@@ -8,7 +8,7 @@
         </div>
         <div class="flex flex-col">
           <p class="px-8 text-3xl font-bold mb-6">目录</p>
-          <ul class="flex flex-col pl-6 pr-4">
+          <ul class="flex flex-col pl-6 pr-4 menu-height">
             <li v-for="(anchor,index) in titles" :key="index" :style="{paddingLeft:`${anchor.indent*6}px`}" @click="handleAnchorClick(anchor)">
               <a class="flex flex-row flex-wrap items-center py-1 transform hover:translate-x-1 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                 {{anchor.title}}
@@ -56,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="md:hidden z-10 fixed top-0 left-0 w-screen h-14 box-border flex justify-between px-4 pt-3" :class="bg200">
+        <div class="md:hidden fixed top-0 left-0 w-screen h-14 box-border flex justify-between px-4 pt-3" style="z-index:2" :class="bg200">
           <nuxt-link to="/">
             <icon class="cursor-pointer text-2xl" type="back" />
           </nuxt-link>
@@ -317,5 +317,9 @@ li > a {
 ::v-deep .vuepress-markdown-body {
   background: var(--previewbg);
   @apply px-5 md:px-8 pt-2 pb-6;
+}
+.menu-height{
+  height:calc(100vh - 9.75rem);
+  @apply overflow-scroll;
 }
 </style>
