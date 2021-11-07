@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center default-box min-h-screen" :style="[{ '--seasonbg': season }]">
+  <div class="flex justify-center min-h-screen">
     <div class="flex flex-col container" :class="bg200">
       <div class="flex justify-between sm:p-4 sm:pb-3 sm:pt-3">
         <div class="flex flex-col justify-between flex-grow">
@@ -141,19 +141,6 @@ export default {
     ...mapGetters('user', ['getUserInfo']),
     currentYear() {
       return this.$dayjs().year();
-    },
-    season() {
-      let temp;
-      if (month >= 1 && month <= 3) {
-        temp = "spring";
-      } else if (month >= 4 && month <= 6) {
-        temp = "summer";
-      } else if (month >= 7 && month <= 9) {
-        temp = "autumn";
-      } else {
-        temp = "winter";
-      }
-      return `url(${require(`~/assets/img/background/${temp}.jpg`)})`;
     },
     text200() {
       let temp;
@@ -313,20 +300,5 @@ export default {
 </script>
 
 <style>
-.default-box {
-  position: relative;
-}
-.default-box::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background-image: var(--seasonbg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-  filter: blur(13px);
-}
+
 </style>
