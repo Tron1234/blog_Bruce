@@ -2,14 +2,14 @@
   <div>
     <!-- sideBar -->
     <div class="h-screen flex flex-row bg-gray-100 box-border">
-      <div class="z-10 fixed inset-0 flex flex-col justify-between transition-all pt-4 pb-8 border-r-2 border-gray-100 overflow-hidden w-48 -translate-x-48" :class="[{'transform':hideMenu},bg200]">
+      <div class="z-10 fixed inset-0 flex flex-col justify-between transition-all pt-4 pb-8 border-r-2 border-gray-100 overflow-hidden w-60 -translate-x-60" :class="[{'transform':hideMenu},bg200]">
         <div class="absolute top-3 right-3 text-2xl" @click="hideMenu = true">
           <icon class="cursor-pointer text-2xl" type="menu_hide" />
         </div>
         <div class="flex flex-col">
           <p class="px-8 text-3xl font-bold mb-6">目录</p>
           <ul class="flex flex-col pl-6 pr-4 menu-height">
-            <li v-for="(anchor,index) in titles" :key="index" :style="{paddingLeft:`${anchor.indent*6}px`}" @click="handleAnchorClick(anchor)">
+            <li v-for="(anchor,index) in titles" :key="index" :style="{paddingLeft:`${anchor.indent*18}px`}" @click="handleAnchorClick(anchor)">
               <a class="flex flex-row flex-wrap items-center py-1 transform hover:translate-x-1 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
                 {{anchor.title}}
               </a>
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="absolute left-0 top-0 right-0 transition-all bg-white" :class="[{'md:left-48':!hideMenu},bg200]">
+      <div class="absolute left-0 top-0 right-0 transition-all bg-white" :class="[{'md:left-60':!hideMenu},bg200]">
         <div class="hidden sticky top-0 z-10 md:flex items-center justify-between px-8 py-3" :class="bg200">
           <div class="flex items-center">
             <div class="mr-4" v-show="hideMenu" @click="hideMenu = false">
