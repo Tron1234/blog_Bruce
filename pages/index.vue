@@ -1,7 +1,7 @@
 <template>
-  <div class="flex">
+  <div class="flex flex-grow" :class="scrollBarColor">
     <div class="w-0 flex-grow md:px-5 lg:pr-1 md:pb-4">
-      <div class="fixed left-0 top-0 w-full h-26 sm:h-auto sm:static z-50 md:z-0">
+      <div class="fixed left-0 top-0 w-full h-26 sm:h-auto sm:static z-50 md:z-0 mb-4">
         <!-- 搜索框 -->
         <div class="
               flex
@@ -95,8 +95,8 @@
       </div>
 
       <!-- 文章 -->
-      <div class="sm:w-full mx-3 pt-25 sm:m-0 sm:pt-0 sm:px-4 md:px-0">
-        <div class="w-full cursor-pointer p-4 sm:px-8 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-4" v-for="(item,index) of articleList" :key="index" @click="articleDetail(item.id)">
+      <div class="sm:w-full mx-3 pt-28 sm:m-0 sm:pt-0 sm:px-4 md:px-0 article-height">
+        <div class="w-full cursor-pointer p-4 sm:px-8 bg-white rounded-lg shadow-md dark:bg-gray-800" :class="{'mt-4':index}" v-for="(item,index) of articleList" :key="index" @click="articleDetail(item.id)">
           <div class="flex items-center justify-between">
             <span class="text-sm font-light text-gray-600 dark:text-gray-400">{{item.time | timeFilter}}</span>
             <a class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform rounded-lg tworow-ellipsis" :class="[bg500,hoverbg400]" @click.stop="getArticleBySecondaryCategory(item.secondaryCategoryId)">{{item.secondaryName}}</a>
@@ -178,11 +178,13 @@
                 xl:text-2xl
                 text-gray-700
                 font-bold
+                mb-4
               ">
             推荐文章
           </div>
           <!-- 推荐文章1 -->
-          <div class="
+          <div class="commond-article">
+            <div class="
                 w-full
                 p-4
                 bg-white
@@ -190,11 +192,10 @@
                 shadow-md
                 dark:bg-gray-800
                 cursor-pointer
-                mt-4
-              " v-for="(item,index) of recommandArticleList" :key="index" @click="articleDetail(item.id)">
-            <div class="flex items-center justify-between flex-wrap">
-              <span class="text-xs font-light text-gray-600 dark:text-gray-400 whitespace-nowrap lg:text-sm leading-8">{{item.time | timeFilter}}</span>
-              <a class="
+              " :class="{'mt-4':index}" v-for="(item,index) of recommandArticleList" :key="index" @click="articleDetail(item.id)">
+              <div class="flex items-center justify-between flex-wrap">
+                <span class="text-xs font-light text-gray-600 dark:text-gray-400 whitespace-nowrap lg:text-sm leading-8">{{item.time | timeFilter}}</span>
+                <a class="
                     py-1
                     px-2
                     xl:px-3
@@ -208,10 +209,10 @@
                     rounded-lg
                     tworow-ellipsis
                   " :class="[bg500,hoverbg400]" @click="getArticleBySecondaryCategory(item.secondaryCategoryId)">{{item.secondaryName}}</a>
-            </div>
+              </div>
 
-            <div class="mt-2">
-              <a class="
+              <div class="mt-2">
+                <a class="
                     text-2xl
                     font-bold
                     text-gray-700
@@ -221,18 +222,19 @@
                     hover:underline
                     tworow-ellipsis
                   ">{{item.title}}</a>
-              <p class="
+                <p class="
                     mt-2
                     text-gray-600
                     dark:text-gray-300
                     dark:hover:text-gray-200
                     tworow-ellipsis
                   ">
-                {{item.content}}
-              </p>
-            </div>
-            <div class="flex items-center justify-end mt-2 text-sm">
-              <a :class="[text600,darktext400]" class="hover:underline">更多详情</a>
+                  {{item.content}}
+                </p>
+              </div>
+              <div class="flex items-center justify-end mt-2 text-sm">
+                <a :class="[text600,darktext400]" class="hover:underline">更多详情</a>
+              </div>
             </div>
           </div>
         </div>
@@ -460,6 +462,30 @@ export default {
           break;
       }
       return temp;
+    },
+    scrollBarColor(){
+      let temp;
+      switch (this.$store.state.themes.theme) {
+        case 'red':
+          temp = `scroll-bar-red`;
+          break;
+        case 'pink':
+          temp = `scroll-bar-pink`;
+          break;
+        case 'orange':
+          temp = `scroll-bar-orange`;
+          break;
+        case 'green':
+          temp = `scroll-bar-green`;
+          break;
+        case 'blue':
+          temp = `scroll-bar-blue`;
+          break;
+        case 'purple':
+          temp = `scroll-bar-purple`;
+          break;
+      }
+      return temp;
     }
   },
   components: {
@@ -556,5 +582,74 @@ export default {
   -webkit-line-clamp: 2;
   word-break: break-all;
   overflow: hidden;
+}
+.article-height {
+  @media (min-width: 768px) {
+    padding-right:4px;
+    height: calc(100vh - 12.5rem);
+    overflow-y: auto;
+  }
+}
+.commond-article {
+  @media (min-width: 768px) {
+    padding-right:4px;
+    height: 310px;
+    overflow-y: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+  border-radius: 2px;
+}
+
+.scroll-bar-red ::-webkit-scrollbar-thumb{
+  @apply bg-red-300;
+}
+
+.scroll-bar-pink ::-webkit-scrollbar-thumb{
+  @apply bg-pink-300;
+}
+
+.scroll-bar-orange ::-webkit-scrollbar-thumb{
+  @apply bg-orange-300;
+}
+
+.scroll-bar-green ::-webkit-scrollbar-thumb{
+  @apply bg-green-300;
+}
+
+.scroll-bar-blue ::-webkit-scrollbar-thumb{
+  @apply bg-blue-300;
+}
+
+.scroll-bar-purple ::-webkit-scrollbar-thumb{
+  @apply bg-purple-300;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background-color: var(--theme);
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+  /*border-radius: 10px;*/
+  border-radius: 2px;
 }
 </style>

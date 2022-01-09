@@ -13,7 +13,7 @@ module.exports = {
     colors: {
       white: '#FFF',
       black: '#000',
-      gray: colors.trueGray,
+      gray: colors.neutral,
       red: colors.red,
       orange: colors.orange,
       amber: colors.amber,
@@ -30,7 +30,7 @@ module.exports = {
         800: '#065F46',
         900: '#064E3B',
       },
-      blue: colors.lightBlue,
+      blue: colors.sky,
       purple: colors.purple,
       pink: colors.pink,
     },
