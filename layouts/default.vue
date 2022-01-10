@@ -132,7 +132,6 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import contactDialog from '@/components/layouts/default/contact-dialog.vue';
-const month = new Date().getMonth() + 1; //获取当前时间
 export default {
   data() {
     return {

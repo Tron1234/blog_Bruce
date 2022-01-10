@@ -2,7 +2,7 @@
   <div>
     <!-- sideBar -->
     <div class="h-screen flex flex-row bg-gray-100 box-border">
-      <div class="z-10 fixed inset-0 flex flex-col justify-between transition-all pt-4 pb-8 border-r-2 border-gray-100 overflow-hidden w-60 -translate-x-60" :class="[{'transform':hideMenu},bg200]">
+      <div class="z-10 fixed inset-0 flex flex-col justify-between transition-all pt-4 pb-8 border-r-2 border-gray-100 overflow-hidden w-60" :class="[{'-translate-x-60 transform':hideMenu},bg200]">
         <div class="absolute top-3 right-3 text-2xl" @click="hideMenu = true">
           <icon class="cursor-pointer text-2xl" type="menu_hide" />
         </div>
@@ -320,6 +320,6 @@ li > a {
 }
 .menu-height{
   height:calc(100vh - 9.75rem);
-  @apply overflow-scroll;
+  @apply overflow-y-auto;
 }
 </style>
