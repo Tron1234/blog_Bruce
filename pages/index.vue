@@ -593,7 +593,7 @@ export default {
 .commond-article {
   @media (min-width: 768px) {
     padding-right:4px;
-    height: 310px;
+    height: calc(100vh - 25.5rem);
     overflow-y: auto;
   }
 }
